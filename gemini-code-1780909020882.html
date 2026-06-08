@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bộ 10 Đề Thi Địa Lí 10</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+  background:#f5f4f0;
+  color:#1a1a18;
+  font-size:15px;
+  line-height:1.6;
+}
+.container{max-width:700px;margin:0 auto;padding:16px}
+.header{text-align:center;padding:20px 0 16px}
+.header h1{font-size:20px;font-weight:600;color:#1a1a18;margin-bottom:4px}
+.header p{font-size:13px;color:#6b6b68}
+.de-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
+.de-btn{
+  background:#fff;
+  border:1px solid #d8d6ce;
+  border-radius:8px;
+  padding:10px 4px;
+  cursor:pointer;
+  font-size:13px;
+  color:#3a3a38;
+  text-align:center;
+  font-family:inherit;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.de-btn:active{transform:scale(0.96)}
+.de-btn.active{border:2px solid #185FA5;color:#185FA5;font-weight:600;background:#EEF5FC}
+.score-box{
+  background:#fff;
+  border:1px solid #d8d6ce;
+  border-radius:10px;
+  padding:14px 16px;
+  margin-bottom:16px;
+  text-align:center;
+}
+.score-big{font-size:30px;font-weight:700;color:#185FA5}
+.score-sub{font-size:13px;color:#6b6b68;margin-top:3px}
+.section-label{
+  font-size:11px;
+  font-weight:600;
+  color:#888780;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin:20px 0 10px;
+}
+.q-card{
+  background:#fff;
+  border:1px solid #e0ded6;
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+}
+.q-num{font-size:11px;color:#aaa89e;margin-bottom:4px;font-weight:500}
+.q-text{font-size:14px;color:#1a1a18;line-height:1.65;margin-bottom:10px}
+.options{display:flex;flex-direction:column;gap:7px}
+.opt{
+  display:flex;
+  align-items:flex-start;
+  gap:9px;
+  padding:9px 11px;
+  border-radius:8px;
+  border:1px solid #e0ded6;
+  cursor:pointer;
+  font-size:13.5px;
+  color:#1a1a18;
+  line-height:1.5;
+  background:#fafaf8;
+  -webkit-tap-highlight-color:transparent;
+  transition:all .12s;
+}
+.opt:active{opacity:.8}
+.opt.selected{border-color:#185FA5;background:#EEF5FC;color:#0C447C}
+.opt.correct{border-color:#3B6D11;background:#EAF3DE;color:#27500A}
+.opt.wrong{border-color:#A32D2D;background:#FCEBEB;color:#791F1F}
+.opt-label{font-weight:600;min-width:14px;flex-shrink:0}
+.ds-card{
+  background:#fff;
+  border:1px solid #e0ded6;
+  border-radius:10px;
+  padding:14px;
+  margin-bottom:10px;
+}
+.ds-title{font-size:12px;font-weight:600;color:#5a5a58;margin-bottom:10px}
+.ds-item{
+  padding:10px 0;
+  border-bottom:1px solid #f0ede6;
+}
+.ds-item:last-child{border-bottom:none}
+.ds-text{font-size:13.5px;color:#1a1a18;line-height:1.6;margin-bottom:8px}
+.ds-btns{display:flex;gap:8px}
+.ds-btn{
+  flex:1;
+  padding:8px 4px;
+  border:1px solid #d8d6ce;
+  border-radius:7px;
+  background:#fafaf8;
+  font-size:13px;
+  font-family:inherit;
+  cursor:pointer;
+  color:#3a3a38;
+  -webkit-tap-highlight-color:transparent;
+  transition:all .12s;
+}
+.ds-btn:active{opacity:.75}
+.ds-btn.picked-dung {background:#EEF5FC;border-color:#185FA5;color:#0C447C;font-weight:600}
+.ds-btn.picked-sai {background:#FFF0EE;border-color:#C0392B;color:#791F1F;font-weight:600}
+.ds-btn.correct-dung {background:#EAF3DE;border-color:#3B6D11;color:#27500A;font-weight:600}
+.ds-btn.correct-sai {background:#EAF3DE;border-color:#3B6D11;color:#27500A;font-weight:600}
+.ds-btn.wrong-choice {background:#FCEBEB;border-color:#A32D2D;color:#791F1F;font-weight:600}
+.ds-result{
+  display:inline-block;
+  margin-top:5px;
+  font-size:12px;
+  font-weight:600;
+  padding:2px 8px;
+  border-radius:5px;
+}
+.ds-result.ok{background:#EAF3DE;color:#27500A}
+.ds-result.fail{background:#FCEBEB;color:#791F1F}
+.ds-result.skip{background:#f5f4f0;color:#888780}
+.submit-btn{
+  width:100%;
+  padding:13px;
+  background:#185FA5;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+  margin-top:16px;
+  margin-bottom:24px;
+  -webkit-tap-highlight-color:transparent;
+}
+.submit-btn:active{background:#0C447C}
+.reset-btn{
+  width:100%;
+  padding:13px;
+  background:#f5f4f0;
+  color:#1a1a18;
+  border:1px solid #d8d6ce;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:600;
+  font-family:inherit;
+  cursor:pointer;
+  margin-top:16px;
+  margin-bottom:24px;
+  -webkit-tap-highlight-color:transparent;
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>📚 Bộ 10 Đề Thi Địa Lí</h1>
+    <p>Mỗi đề: 24 câu trắc nghiệm + 3 câu đúng/sai (4 ý mỗi câu)</p>
+  </div>
+  <div class="de-grid" id="deGrid"></div>
+  <div id="scoreBox"></div>
+  <div id="examContent"></div>
+</div>
+
+<script>
+// Tổng kho câu hỏi gốc
+var ALL_TN=[
+  {q:"Nước ta nằm trong vùng nội chí tuyến nên",opts:["Mặt Trời luôn ở trên thiên đỉnh.","Chịu tác động của gió Mậu dịch.","Có các loại gió thổi theo mùa.","Biên độ nhiệt trong năm khá lớn."],ans:1},
+  {q:"Vị trí địa lí của nước ta nằm ở",opts:["Trung tâm của Đông Nam Á.","Phía đông của Thái Bình Dương.","Phía nam của chí tuyến Bắc.","Phía đông nam của Lào."],ans:2},
+  {q:"Nơi đón bình minh sớm nhất trên lãnh thổ đất liền của nước ta là",opts:["Điểm cực Bắc.","Điểm cực Nam.","Điểm cực Đông.","Điểm cực Tây."],ans:2},
+  {q:"Nước ta nằm trong vùng có khí hậu nhiệt đới ẩm gió mùa nên có",opts:["Nhiệt độ cao, mưa lớn quanh năm.","Nhiều con sông nhỏ, ngắn, dốc.","Các loài sinh vật phát triển mạnh.","Nhiều loại thổ nhưỡng khác nhau."],ans:2},
+  {q:"Nước ta nằm trong khu vực nội chí tuyến nên có",opts:["Cảnh sắc thiên nhiên phân hoá đa dạng.","Lượng mưa phân hoá theo thời gian.","Biên độ nhiệt độ trung bình năm cao.","Các loài sinh vật ưa nóng phát triển."],ans:3},
+  {q:"Phát biểu KHÔNG đúng với dân số nước ta hiện nay là",opts:["Đang có cơ cấu dân số vàng.","Tốc độ già hóa dân số nhanh.","Có số nam nhiều hơn số nữ.","Tỉ số giới tính khá cân bằng."],ans:2},
+  {q:"Lao động của nước ta hiện nay",opts:["Số lượng lớn, phần lớn đã qua đào tạo.","Phân bố khá đồng đều ở các vùng.","Tỉ lệ lao động phi nông nghiệp tăng.","Chủ yếu làm trong ngành nông nghiệp."],ans:2},
+  {q:"Dịch vụ nào sau đây KHÔNG thuộc ngành bưu chính?",opts:["Chuyển bưu kiện.","Chuyển thư.","Phát hành báo chí.","Mạng truyền dẫn."],ans:3},
+  {q:"Vùng có số lượng đàn bò lớn nhất ở nước ta hiện nay là",opts:["Trung du và miền núi phía Bắc.","Bắc Trung Bộ.","Duyên hải Nam Trung Bộ và Tây Nguyên.","Đông Nam Bộ."],ans:2},
+  {q:"Tỉ số giới tính khi sinh của dân số nước ta hiện nay",opts:["Đang giảm mạnh.","Đang khá cân bằng.","Không có sự thay đổi.","Có sự chênh lệch lớn."],ans:3},
+  {q:"Loại hình giao thông hỗ trợ vận chuyển tàu công-te-nơ từ cảng biển vào sâu nội địa là",opts:["Đường sắt.","Đường ống.","Đường sông.","Đường biển."],ans:2},
+  {q:"Biện pháp chủ yếu để tăng sản lượng nông sản hàng hóa ở Trung du và miền núi phía Bắc là",opts:["Sử dụng các loại giống mới.","Đa dạng hóa các sản phẩm.","Đầu tư công tác chế biến sâu.","Mở rộng vùng chuyên canh."],ans:3},
+  {q:"Trong cơ cấu hàng nhập khẩu, nhóm hàng tư liệu sản xuất chiếm tỉ trọng lớn nhất chủ yếu do",opts:["Ngành công nghiệp phát triển.","Mức sống của dân cư tăng.","Đẩy mạnh quá trình đô thị hóa.","Nhu cầu của sản xuất tăng."],ans:3},
+  {q:"Vùng đồi núi của Bắc Trung Bộ có thế mạnh lớn để",opts:["Trồng cây hàng năm.","Phát triển du lịch.","Chăn nuôi gia cầm.","Nuôi trồng hải sản."],ans:1},
+  {q:"Hiện nay, Đông Nam Bộ dẫn đầu cả nước về",opts:["Giá trị sản xuất công nghiệp.","Hoạt động sản xuất thủy điện.","Diện tích cây công nghiệp.","Tỉ lệ dân cư sống ở thành thị."],ans:3},
+  {q:"Đồng bằng sông Cửu Long có",opts:["Bờ biển dài, many vịnh nước sâu.","Nguồn dự trữ thủy năng dồi dào.","Trữ lượng than bùn tương đối lớn.","Khí hậu nóng ẩm, mưa quanh năm."],ans:2},
+  {q:"Nhân tố chủ yếu ảnh hưởng đến tốc độ tăng trưởng ngành dịch vụ nước ta là",opts:["Chính sách phát triển dịch vụ.","Thị trường trong và ngoài nước.","Các ngành sản xuất vật chất.","Khoa học – công nghệ hiện đại."],ans:2},
+  {q:"Hai vùng kinh tế - xã hội có nhiều đặc khu nhất ở nước ta là",opts:["Bắc Trung Bộ, Nam Trung Bộ.","Đông Nam Bộ, Đồng bằng sông Hồng.","Đồng bằng sông Hồng, Nam Trung Bộ.","Đồng bằng sông Cửu Long, Đông Nam Bộ."],ans:2},
+  {q:"Hoạt động lâm sinh ở Duyên hải Nam Trung Bộ và Tây Nguyên hiện nay",opts:["Bao gồm trồng rừng, chế biến gỗ.","Sản lượng gỗ khai thác đang tăng.","Gắn với việc giao rừng cho dân cư.","Khai thác lâm sản được đẩy mạnh."],ans:2},
+  {q:"Vùng kinh tế - xã hội có diện tích lãnh thổ lớn nhất nước ta là",opts:["Đồng bằng sông Cửu Long.","Trung du và miền núi phía Bắc.","Đồng bằng sông Hồng.","Duyên hải Nam Trung Bộ và Tây Nguyên."],ans:3},
+  {q:"Vùng có số lượng đàn lợn lớn nhất nước ta hiện nay là",opts:["Đồng bằng sông Hồng.","Đồng bằng sông Cửu Long.","Đông Nam Bộ.","Trung du và miền núi phía Bắc."],ans:3},
+  {q:"Trong các khu công nghệ cao, được thành lập muộn nhất là",opts:["Hòa Lạc.","Sinh học Hà Nội.","Đà Nẵng.","Sinh học Đồng Nai."],ans:1},
+  {q:"Các đô thị của nước ta hiện nay",opts:["Đã hình thành khá nhiều siêu đô thị.","Phát triển các ngành phi nông nghiệp.","Hầu hết là lao động đã qua đào tạo.","Cơ sở hạ tầng đô thị đều rất hiện đại."],ans:1},
+  {q:"Vị trí địa lí của nước ta",opts:["Ở trung tâm của Đông Nam Á.","Nằm trên vành đai sinh khoáng.","Nằm hoàn toàn ở bán cầu Đông.","Ở phía đông bắc của châu Á."],ans:2},
+  {q:"Lãnh thổ của nước ta",opts:["Nằm hoàn toàn trong một múi giờ.","Có lượng mưa lớn quanh năm.","Nằm trên vành đai sinh khoáng.","Gồm nhiều bộ phận hợp thành."],ans:3},
+  {q:"Thiên tai có nguồn gốc từ khí tượng ở nước ta là",opts:["Động đất.","Mưa đá.","Nước dâng.","Ngập lụt."],ans:1},
+  {q:"Ở nước ta, khí tự nhiên là nguyên liệu chủ yếu phát triển ngành",opts:["Điện tái tạo, lọc hóa dầu.","Nhiệt điện, lọc hóa dầu.","Khí hóa lỏng, phân đạm.","Nhiệt điện, dệt may, giày da."],ans:2},
+  {q:"Các đô thị của nước ta hiện nay",opts:["Đã hình thành siêu đô thị đầu tiên.","Tập trung rất ít lao động có kỹ thuật.","Chuyên sản xuất ngành nông nghiệp.","Có tỉ lệ thiếu việc làm ở mức rất cao."],ans:0},
+  {q:"Mặt hàng chiếm tỉ trọng cao nhất trong cơ cấu giá trị xuất khẩu của nước ta là",opts:["Tư liệu sản xuất.","Nông, lâm, thủy sản.","Hàng tiêu dùng.","Công nghiệp chế biến."],ans:3},
+  {q:"Trong cơ cấu lao động theo thành phần kinh tế, tỉ trọng lao động ngoài Nhà nước có xu hướng",opts:["Ổn định.","Tăng.","Biến động.","Giảm."],ans:3},
+  {q:"Biện pháp chủ yếu tăng diện tích rừng đặc dụng ở Bắc Trung Bộ là",opts:["Tăng khoanh nuôi rừng.","Thành lập vườn quốc gia.","Giao rừng cho người dân.","Đẩy mạnh bảo vệ rừng."],ans:1},
+  {q:"Đặc điểm thiên nhiên vùng núi Đông Bắc là",opts:["Có cảnh quan thiên nhiên nhiệt đới ẩm gió mùa.","Mang sắc thái của vùng cận nhiệt đới gió mùa.","Cảnh quan thiên nhiên giống như vùng ôn đới.","Có cảnh quan thiên nhiên cận xích đạo gió mùa."],ans:1},
+  {q:"Hiện nay, Đông Nam Bộ dẫn đầu cả nước về",opts:["Khối lượng vận chuyển hàng hóa.","Mật độ mạng lưới vận tải đường sắt.","Diện tích cây công nghiệp lâu năm.","Số lượng khu chế xuất đang hoạt động."],ans:3},
+  {q:"Sản lượng lương thực bình quân đầu người ở Bắc Trung Bộ còn thấp chủ yếu do",opts:["Thị trường biến động, chế biến hạn chế.","Lãnh thổ hẹp ngang, núi lan ra sát biển.","Đồng bằng nhỏ hẹp, có nhiều thiên tai.","Sông ngòi ngắn dốc, địa hình hiểm trở."],ans:2},
+  {q:"Phần lãnh thổ phía Nam có lượng mưa thay đổi theo thời gian do tác động chủ yếu của",opts:["Gió mùa Đông Bắc, gió Tây Nam, địa hình, bão.","Vị trí địa lí, gió Tín Phong, hướng các dãy núi.","Gió mùa hạ, gió hướng Đông Bắc, dải hội tụ, bão.","Gió mùa Tây Nam, áp thấp xích đạo, dải hội tụ."],ans:2},
+  {q:"Khu vực kinh tế có vốn đầu tư nước ngoài chiếm tỉ trọng cao trong xuất khẩu chủ yếu do",opts:["Thị trường tiêu thụ lớn, chính sách mở cửa hội nhập.","Khoa học công nghệ phát triển, lao động trình độ cao.","Nguồn vốn đầu tư lớn, sản phẩm hàng hoá đa dạng.","Chính sách của nhà nước, trình độ phát triển kinh tế."],ans:3},
+  {q:"Tổng mức bán lẻ hàng hóa ở miền núi còn khá thấp chủ yếu do",opts:["Nhu cầu thị trường nhỏ, trình độ lao động còn hạn chế, thiếu vốn.","Chất lượng cuộc sống thấp, many đồi núi hiểm trở, ít chợ và siêu thị.","Kinh tế chậm phát triển, thiếu vốn, khoa học công nghệ chậm đổi mới.","Hệ thống phân phối hạn chế, mức sống thấp, sản xuất phát triển chậm."],ans:3},
+  {q:"Khó khăn chủ yếu về tự nhiên của giao thông đường thủy nội địa là",opts:["Phương tiện vận tải khá hạn chế.","Hoạt động của gió mùa Đông Bắc.","Sự thay đổi độ sâu luồng lạch.","Thiếu nguồn vốn đầu tư phát triển."],ans:2},
+  {q:"Các thành phố trực thuộc trung ương của nước ta hiện nay",opts:["Phân bố ở tất cả các vùng trên cả nước.","Có các ngành phi nông nghiệp phát triển.","Mức sống dân cư cao và khá đồng đều.","Đều giáp với biển Đông, có các cảng biển."],ans:1},
+  {q:"Vùng có số lượng đàn lợn lớn nhất",opts:["Đồng bằng sông Hồng.","Đồng bằng sông Cửu Long.","Đông Nam Bộ.","Trung du và miền núi phía Bắc."],ans:3},
+  {q:"Hiện nay, Đông Nam Bộ dẫn đầu cả nước về",opts:["Diện tích trồng cây cao su và hồ tiêu.","Diện tích cây công nghiệp lâu năm.","Tỉ trọng đóng góp trong GDP cả nước.","Khối lượng vận chuyển hàng hóa."],ans:2},
+  {q:"Đồng bằng sông Hồng KHÔNG dẫn đầu cả nước về",opts:["Giá trị sản xuất công nghiệp.","Tỉ lệ dân cư sống tại thành thị.","Trữ lượng của than antraxit.","Mật độ giao thông đường sắt."],ans:1},
+  {q:"Quá trình đô thị hóa ở nước ta hiện nay",opts:["Tỉ lệ dân thành thị cao nhất khu vực.","Hoàn toàn gắn với công nghiệp hóa.","Đã hình thành chuỗi các siêu đô thị.","Chưa đáp ứng yêu cầu phát triển."],ans:3},
+  {q:"Thuận lợi chủ yếu nuôi trồng thủy sản nội địa ở Duyên hải Nam Trung Bộ và Tây Nguyên là",opts:["Lao động đông đảo, tàu thuyền hiện đại.","Có many ở trũng, ao hồ, sông suối.","Có many đầm phá, các đảo ven bờ.","Có các ngư trường trọng điểm lớn."],ans:1},
+  {q:"Nhóm ngành công nghiệp chế biến, chế tạo ở Đồng bằng sông Hồng chiếm tỉ trọng cao chủ yếu do",opts:["Chính sách mở cửa, hạ tầng phát triển, đầu tư khoa học công nghệ.","Cơ cấu ngành đa dạng, lao động đông đảo, thu hút many vốn đầu tư.","Thị trường rộng, lao động có trình độ, nguồn nguyên liệu phong phú.","Có many ngành, hiệu quả kinh tế cao, nguồn lực phát triển đa dạng."],ans:3},
+  {q:"Hoạt động nuôi trồng thủy sản của vùng Duyên hải Nam Trung Bộ và Tây Nguyên",opts:["Chủ yếu phát triển ở các sông suối.","Cơ cấu sản phẩm còn kém đa dạng.","Phát triển mạnh hơn so với khai thác.","Có sản lượng nhỏ hơn so với khai thác."],ans:3},
+  {q:"Việc phát triển nông nghiệp hàng hoá ở Duyên hải Nam Trung Bộ và Tây Nguyên nhằm",opts:["Tạo ra sản phẩm hàng hóa, thu hút đầu tư nước ngoài.","Nâng cao vị thế vùng, đa dạng hóa nhu cầu thị trường.","Tăng chất lượng sản phẩm, tạo nguồn hàng xuất khẩu.","Nâng cao mức sống dân cư, tạo ra nguồn lợi nhuận lớn."],ans:3},
+  {q:"Ý nghĩa chủ yếu đẩy mạnh xuất khẩu nông sản ở Trung du và miền núi phía Bắc là",opts:["Thu hút nguồn ngoại tệ, nâng vị thế của vùng.","Mở rộng thị trường, sử dụng hiệu quả lao động.","Nâng cao đời sống, đa dạng hóa nền kinh tế.","Nâng cao nguồn thu nhập, phát triển sản xuất."],ans:3},
+  {q:"Biên độ nhiệt độ trung bình năm tăng dần từ Nam ra Bắc chủ yếu do",opts:["Gió mùa Tây Nam, Tín phong Bắc bán cầu, hình dạng lãnh thổ.","Các hướng núi chính, gió mùa Đông Bắc, Tín phong Bắc bán cầu.","Hoàn lưu khí quyển, thời gian Mặt Trời lên thiên đỉnh, vị trí địa lí.","Gió mùa Đông Bắc, gió mùa Tây Nam, hướng các dãy núi chính."],ans:2},
+  {q:"Vùng đồng bằng ven biển Bắc Trung Bộ có mùa khô nóng chủ yếu do",opts:["Hoàn lưu khí quyển, bức chắn địa hình, dải hội tụ nhiệt đới.","Gió mùa Tây Nam, dãy Bạch Mã, biến đổi khí hậu toàn cầu.","Gió Tín phong bán cầu Nam, địa hình chắn gió, frông lạnh.","Các gió hướng Tây Nam và Đông Bắc, bức chắn địa hình."],ans:3},
+  {q:"Sinh vật nhiệt đới chiếm ưu thế ở nước ta chủ yếu là do",opts:["Vị trí nội chí tuyến bán cầu Bắc, địa hình đa dạng, luồng di cư sinh vật.","Hoàn lưu khí quyển, vị trí năm gần xích đạo, đất đai phân hoá đa dạng.","Bức xạ Mặt Trời lớn, địa hình thấp chiếm ưu thế, luồng di cư sinh vật.","Nền nhiệt cao, địa hình phân hoá đa dạng, lượng mưa lớn theo mùa."],ans:2},
+  {q:"Sườn Đông và sườn Tây dãy Trường Sơn Nam khác nhau về mùa mưa/khô do",opts:["Gió mùa Đông Nam và Tín phong Đông Bắc.","Gió mùa Đông Bắc và gió mùa Tây Nam.","Gió mùa mùa hạ và gió mùa mùa đông.","Gió Tây Nam và Tín phong Bắc bán cầu."],ans:3},
+  {q:"Đồng bằng sông Cửu Long trồng lúa chất lượng cao nhằm",opts:["Thích ứng biến đổi khí hậu, tạo nâng suất cao, tạo many việc làm.","Phát huy thế mạnh đất đai, tăng hàng xuất khẩu, tăng trưởng kinh tế.","Thu hút vốn đầu tư, đảm bảo an ninh lương thực, phát huy thế mạnh.","Thay đổi cơ cấu sản xuất, tăng hiệu quả kinh tế, thích ứng với tự nhiên."],ans:3},
+  {q:"Khí hậu miền Bắc và Đông Bắc Bắc Bộ khác miền Nam chủ yếu do",opts:["Vị trí gần ngoại chí tuyến, thời gian Mặt Trời lên thiên đỉnh, gió mùa hạ.","Các gió thổi trong năm, hai lần Mặt Trời lên thiên đỉnh, vị trí ở gần chí tuyến.","Vị trí xa xích đạo, Tín phong bán cầu Bắc, gió mùa Tây Nam, bão, dải hội tụ.","Gió mùa đông, vị trí ở trong vùng nội chí tuyến, dải hội tụ, áp thấp nhiệt đới."],ans:1},
+  {q:"Dân số nước ta hiện nay",opts:["Mật độ dân số ở miền núi đang tăng.","Chủ yếu sinh sống tại các đô thị.","Cơ cấu dân số già, số người già tăng.","Có quy mô đứng thứ ba Châu Á."],ans:0},
+  {q:"Ý nghĩa kinh tế của việc đẩy mạnh đánh bắt thủy sản xa bờ ở Hoàng Sa, Trường Sa là",opts:["Phòng chống các thiên tai trên biển.","Cung cấp nguyên liệu cho chế biến.","Bảo vệ chủ quyền, toàn vẹn lãnh thổ.","Tăng sản lượng thủy sản khai thác."],ans:3},
+  {q:"Tác động tiêu cực về xã hội của quá trình đô thị hóa ở nước ta là",opts:["Gia tăng tỉ lệ thiếu việc ở nông thôn.","Vấn đề ô nhiễm môi trường gia tăng.","Giảm khả năng tích lũy nguồn vốn.","Làm gia tăng phân hóa giàu nghèo."],ans:3},
+  {q:"Nguyên nhân gây mưa lớn cho khu vực Nam Bộ vào giữa và cuối mùa hạ là do",opts:["Tác động của bão và dải hội tụ nhiệt đới.","Hướng lượng Mặt Trời lên thiên đỉnh.","Giáp biển, gió Tây Nam từ vịnh Bengan.","Tác động của gió mậu dịch bán cầu Nam."],ans:3},
+  {q:"Khu công nghiệp nước ta",opts:["Bao gồm khá many tỉnh và thành phố.","Gắn với công nghiệp hóa, số lượng giảm.","Chỉ chuyên sản xuất mặt hàng xuất khẩu.","Phát triển khu công nghiệp tuần hoàn."],ans:3},
+  {q:"Việc quản lí và sử dụng nước sông ở Đồng bằng sông Cửu Long gặp khó khăn chủ yếu do",opts:["Trình độ khoa học kĩ thuật thấp.","Khí hậu thay đổi thất thường.","Vị trí ở hạ nguồn các sông lớn.","Chịu tác động biến đổi khí hậu."],ans:2},
+  {q:"Biện pháp nâng cao năng suất cây ăn quả ở Trung du và miền núi phía Bắc là",opts:["Mở rộng diện tích đất canh tác.","Đưa giống mới vào sản xuất.","Đẩy mạnh công nghiệp chế biến.","Mở rộng thị trường tiêu thụ."],ans:1},
+  {q:"Du lịch nước ta hiện nay phát triển mạnh chủ yếu do",opts:["Đổi mới chính sách, trình độ lao động tăng.","Hội nhập toàn cầu sâu rộng, kinh tế phát triển.","Hoàn thiện hạ tầng, mở rộng many thị trường.","Nhu cầu thị trường tăng, khai thác tốt tài nguyên."],ans:3},
+  {q:"Kim ngạch xuất khẩu hàng công nghiệp chế biến tăng nhanh chủ yếu do",opts:["Hội nhập quốc tế rộng, cơ cấu đa dạng.","Thúc đẩy sản xuất, hàng hóa phong phú.","Thị trường đa dạng, many khu chế xuất.","Kinh tế phát triển, có đầu tư nước ngoài."],ans:3},
+  {q:"Những năm gần đây nước ta xuất siêu chủ yếu do",opts:["Công nghiệp hóa mạnh, hội nhập toàn cầu sâu, dân số đông.","Kinh tế phát triển, mức sống tăng, thu hút many vốn đầu tư.","Đẩy mạnh liên doanh, thúc đẩy hội nhập, mở rộng thị trường.","Sản xuất phát triển, đẩy mạnh hội nhập, chính sách nhà nước."],ans:3},
+  {q:"Ý nghĩa ứng dụng công nghệ mới vào sản xuất cây công nghiệp lâu năm ở Duyên hải Nam Trung Bộ và Tây Nguyên",opts:["Bảo vệ tài nguyên đất, tạo các sản phẩm mới, phát triển bền vững.","Tạo các sản phẩm mới, nâng cao giá trị, đáp ứng nhu cầu thị trường.","Cung cấp nguyên liệu cho chế biến, nâng cao chất lượng sản phẩm.","Nâng cao giá trị sản phẩm, mở rộng thị trường, bảo vệ môi trường."],ans:1},
+  {q:"Thảm thực vật của nước ta đa dạng chủ yếu do",opts:["Tác động con người, khí hậu nhiệt đới ẩm và many loại đất khác nhau.","Địa hình đa dạng, vị trí gặp gỡ các luồng di cư, tác động con người.","Sự phân hoá thành phần tự nhiên, luồng di cư và tác động con người.","Vị trí gặp gỡ các luồng di cư, có khí hậu nhiệt đới ẩm, nguồn nước dồi dào."],ans:2},
+  {q:"Thảm thực vật rừng có lượng sinh khối lớn và năng suất sinh học cao chủ yếu do",opts:["Khí hậu nhiệt đới ẩm, đất feralit là chủ yếu, many loài di cư đến.","Quá trình chăm sóc tốt, chính sách phát triển rừng, many đồi núi.","Lượng nhiệt ẩm dồi dào, tầng phong hóa dày, đất có độ phì cao.","Lượng mưa lớn, ảnh hưởng gió mùa, many loài mới được lai tạo."],ans:2},
+  {q:"Mục đích tăng cường công nghệ tiến trong khai thác dầu khí ở Đông Nam Bộ là",opts:["Bảo vệ môi trường, giảm chi phí sản xuất, tăng năng lực cạnh tranh.","Giảm thất thoát tài nguyên, tăng giá trị sản phẩm, bảo vệ môi trường.","Tạo hàng xuất khẩu, tăng sản lượng khai thác, giảm chi phí sản xuất.","Giảm ô nhiễm môi trường, thu hút nguồn đầu tư, tiết kiệm tài nguyên."],ans:1},
+  {q:"Cơ cấu kinh tế Đồng bằng sông Hồng có sự chuyển dịch quan trọng chủ yếu do",opts:["Phát triển cơ sở vật chất kĩ thuật, khai thác thế mạnh, nâng dân trí.","Tăng hợp tác quốc tế, đào tạo nhân lực, phát huy thế mạnh tự nhiên.","Phát triển cơ sở hạ tầng, tăng trưởng kinh tế, đẩy mạnh đô thị hoá.","Thu hút đầu tư, hội nhập toàn cầu sâu rộng, nâng trình độ lao động."],ans:3},
+  {q:"Ý nghĩa chủ yếu bảo vệ tài nguyên rừng ở Đồng bằng sông Cửu Long là",opts:["Giảm thiểu biến đổi khí hậu, tăng nguồn thu nhập cho dân cư.","Tạo ra many sản phẩm hàng hóa, duy trì nguồn nước ngọt.","Bảo đảm cân bằng sinh thái, hạn chế tác động của thiên tai.","Hạn chế triều cường, xâm nhập mặn, giảm sạt lở bờ biển."],ans:2},
+  {q:"Số tháng lạnh ở phần lãnh thổ phía Bắc khác phía Nam chủ yếu do",opts:["Vị trí cách xa xích đạo, hoàn lưu khí quyển, hướng nghiêng địa hình.","Vị trí nằm ở trong vùng nội chí tuyến, gió mùa Đông Bắc, frông lạnh.","Vị trí nằm ở gần chí tuyến, gió hướng đông bắc, độ cao của địa hình.","Vị trí ở xa xích đạo, các loại gió hướng tây nam, hướng các dãy núi."],ans:2},
+  {q:"Biện pháp khai thác hiệu quả nguồn lợi kinh tế từ sông ngòi Đồng bằng sông Cửu Long là",opts:["Tăng liên kết vùng, chống ô nhiễm nguồn, đẩy mạnh nuôi trồng thủy sản.","Phát triển du lịch sông nước, sử dụng nước cho việc sinh hoạt hợp lí.","Phát triển giao thông đường sông, phòng chống ô nhiễm, bảo vệ rừng.","Đầu tư hạ tầng, sử dụng nước hợp lí, phát triển đa dạng ngành nghề."],ans:3},
+  {q:"Giải pháp chủ yếu phát triển nông nghiệp hữu cơ ở Bắc Trung Bộ là",opts:["Phát triển công nghệ, thu hút vốn đầu tư, đa dạng hóa sản phẩm.","Phát triển chế biến, sản xuất tập trung, thu hút vốn nước ngoài.","Mở rộng thị trường, tích cực thâm canh, tạo thương hiệu mới.","Phát triển chuỗi giá trị, áp dụng công nghệ, đẩy mạnh đầu tư."],ans:3},
+  {q:"Trung du và miền núi phía Bắc đẩy mạnh ứng dụng công nghệ cao trong nông nghiệp nhằm",opts:["Tạo ra many hàng hóa, tăng trưởng kinh tế, thúc đẩy thâm canh.","Thúc đẩy chuyển dịch cơ cấu kinh tế, đẩy mạnh xuất khẩu, nâng cao mức sống.","Nâng cao chất lượng sản phẩm, đáp ứng nhu cầu thị trường, thu hút vốn đầu tư.","Nâng cao thu nhập, tăng hiệu quả chuỗi giá trị nông sản, sử dụng tốt thế mạnh."],ans:3},
+  {q:"Ý nghĩa chủ yếu tăng cường liên kết sản xuất ở Đồng bằng Sông Hồng là",opts:["Chuyển dịch cơ cấu kinh tế, giải quyết tốt việc làm, đa dạng hóa cơ cấu sản xuất.","Thu hút vốn, khai thác hiệu quả tài nguyên, tạo many việc làm, nâng cao thu nhập.","Khai thác hiệu quả thế mạnh, thúc đẩy tăng trưởng kinh tế, phát triển bền vững.","Thúc đẩy liên kết với các vùng, mở rộng sản xuất, thu hút vốn đầu tư nước ngoài."],ans:2}
+];
+
+var ALL_DS=[
+  {title:"ĐỊA LÍ TỰ NHIÊN",items:[
+    {s:"Phần lãnh thổ phía Nam nước ta đặc trưng cho vùng có khí đạo gió mùa với nền nhiệt cao quanh năm.",ans:true},
+    {s:"Mùa mưa ở miền Trung đến muộn hơn so với cả nước chủ yếu do tác động của dải hội tụ nhiệt dới và gió mùa Tây Nam.",ans:true},
+    {s:"Sông ngòi nước ta mang tính chất nhiệt đới ẩm gió mùa thể hiện rõ nét qua đặc điểm mạng lưới dày đặc, chế độ nước theo mùa, giàu phù sa, chủ yếu là sông ngắn và dốc.",ans:true},
+    {s:"Sông ngòi nước ta có chế độ nước theo mùa chủ yếu do tác động của vị trí địa lí, gió mùa, biến đổi khí hậu và hoạt động con người.",ans:true},
+    {s:"Gió Tín phong bán cầu Bắc là nguyên nhân chủ yếu gây ra hiện tượng nồm ấm trong thời kì mùa đông ở miền Bắc.",ans:true},
+    {s:"Sông ngòi miền Trung có lũ tiểu mãn vào đầu mùa hạ chủ yếu do ảnh hưởng của gió mùa Tây Nam, bão, front lạnh và dải hội tụ nhiệt đới.",ans:true},
+    {s:"Nguyên nhân gây ra mưa ngâu tháng 8 ở đồng bằng Bắc Bộ và sự hoạt động chậm dần của tháng mưa cực đại từ Bắc vào Nam là do ảnh hưởng của gió mùa Đông Nam và front lạnh.",ans:false},
+    {s:"Miền Tây Bắc và Bắc Trung Bộ có lũ tiểu mãn vào đầu mùa hạ chủ yếu do tác động của gió hướng Tây Nam, bão, áp thấp nhiệt đới.",ans:true},
+    {s:"Phần lãnh thổ phía Nam của nước ta không có đai ôn đới gió mùa trên núi chủ yếu do vị trí nằm gần xích đạo, nhiệt độ cao.",ans:false},
+    {s:"Nguyên nhân chủ yếu làm cho giới hạn trên của đai nhiệt đới gió mùa ở miền Bắc khác với miền Nam là do tác động kết hợp của gió mùa Đông Bắc, vị trí gần xích đạo, địa hình đồi núi thấp.",ans:true},
+    {s:"Thiên nhiên phân hóa theo chiều bắc - nam thể hiện rõ nhất ở sự khác biệt về độ ẩm, lượng mưa và đặc điểm địa hình giữa phần lãnh thổ phía Bắc và phía Nam.",ans:false},
+    {s:"Phần lãnh thổ phía Nam nước ta có nền nhiệt, ẩm cao chủ yếu do tác động của gió hướng Tây Nam, gió Đông Bắc, vị trí địa lí, thời gian Mặt Trời lên thiên đỉnh.",ans:true},
+    {s:"Phần lãnh thổ phía Bắc nước ta xuất hiện many loài thực vật cận nhiệt chủ yếu do tác động kết hợp của vị trí nội chí tuyến, bức xạ Mặt Trời lớn, địa hình, gió mùa Đông Bắc.",ans:true},
+    {s:"Sự phân hóa chế độ nhiệt theo thời gian chủ yếu do tác động kết hợp của hình dạng lãnh thổ, địa hình, bão và dải hội tụ nhiệt đới.",ans:true},
+    {s:"Vào đầu mùa hạ, gió mùa Tây Nam thổi từ áp cao cận chí tuyến bán cầu Nam gây mưa lớn cho các khu vực đón gió ở Nam Bộ.",ans:false},
+    {s:"Gió Tây Nam vào đầu mùa hạ kết hợp với địa hình các dãy núi dọc biên giới Việt - Lào là nguyên nhân gây hiệu ứng phơn khô nóng cho phía nam của vùng núi Tây Bắc.",ans:true},
+    {s:"Lượng mưa lớn và nguồn nước từ ngoài lãnh thổ làm cho sông ngòi của nước ta có độ đục cao.",ans:true},
+    {s:"Gió Tín Phong bán cầu Nam là nhân tố chủ yếu gây nên mưa lớn và kéo dài cho các khu vực đón gió ở Nam Bộ nước ta vào nửa sau mùa hạ.",ans:true},
+    {s:"Nguyên nhân chủ yếu dẫn đến sự đối lập về thời gian mưa - khô của hai sườn dãy Trường Sơn là do kết hợp giữa độ cao địa hình và hướng các loại gió.",ans:true},
+    {s:"Khu vực Đông Trường Sơn có mưa lớn vào thời kỳ thu đông chủ yếu do tác động kết hợp của các gió hướng Đông Bắc, gió mùa Tây Nam, bão, dải hội tụ nhiệt đới.",ans:true}
+  ]},
+  {title:"ĐỊA LÍ CÁC NGÀNH KINH TẾ",items:[
+    {s:"Giải pháp chủ yếu để ổn định sản xuất cây công nghiệp ở nước ta là đẩy mạnh cơ giới hóa, hình thành các vùng chuyên canh, đào tạo lao động.",ans:false},
+    {s:"Ý nghĩa chủ yếu của việc đẩy mạnh phát triển các ngành many chất xám ở nước ta là nâng cao trình độ lao động, tăng khả năng cạnh tranh và khai thác tốt các thế mạnh về tự nhiên.",ans:true},
+    {s:"Cơ cấu cây công nghiệp của nước ta đa dạng do những thuận lợi về nguồn lao động đông đảo, hoạt động chế biến phát triển.",ans:false},
+    {s:"Để nâng cao hiệu quả ngành bưu chính cần đẩy mạnh áp dụng công nghệ hiện đại, tập trung phát triển công ích, liên kết với các ngành kinh tế khác, đào tạo nguồn lao động.",ans:true},
+    {s:"Ý nghĩa chủ yếu của việc đa dạng hóa cơ cấu ngành công nghiệp là thu hút vốn đầu tư, hiện đại hóa hạ tầng, nâng cao đời sống dân cư.",ans:true},
+    {s:"Các loại cây công nghiệp hàng năm của nước ta là mía, lạc, thuốc lá, bông, dừa, đậu tằm.",ans:false},
+    {s:"Cây công nghiệp lâu năm ngày càng chiếm tỉ trọng cao trong cơ cấu giá trị sản xuất ngành trồng trọt chủ yếu do nhu cầu thị trường lớn và luôn ổn định, hiệu quả kinh tế cao, công nghiệp chế biến phát triển.",ans:true},
+    {s:"Nước ta có khí hậu nhiệt đới ẩm gió mùa thuận lợi cho việc phát triển nền nông nghiệp nhiệt đới phát triển ổn định với hiệu quả cao quanh năm.",ans:false},
+    {s:"Cơ cấu các mặt hàng xuất khẩu của nước ta ngày càng đa dạng chủ yếu là do đẩy mạnh hội nhập sâu rộng, kinh tế phát triển mạnh, mức sống dân cư nước ta tăng.",ans:true},
+    {s:"Hoạt động nuôi trồng thủy sản phát triển nhanh chủ yếu do thị trường trong nước và xuất khẩu ngày càng được mở rộng.",ans:true},
+    {s:"Bưu chính nước ta có tốc độ tăng trưởng nhanh trong thời gian gần đây chủ yếu do thương mại điện tử, dịch vụ số bùng nổ, hợp tác với chuỗi sản xuất và dịch vụ.",ans:true},
+    {s:"Du lịch biển đảo ngày càng có vai trò quan trọng trong việc phát triển kinh tế nước ta vì quyết định đến tổng GDP của quốc gia, tiềm năng lớn.",ans:false},
+    {s:"Du lịch tạo động lực thúc đẩy phát triển kinh tế - xã hội, góp phần phát huy lợi thế của địa phương, đặc biệt tăng cường liên kết giữa các vùng.",ans:true},
+    {s:"Nhân tố tác động chủ yếu đến sự đa dạng loại hình du lịch ở nước ta hiện nay là nhu cầu của du khách nội địa và cơ sở vật chất kĩ thuật, cơ sở hạ tầng.",ans:true},
+    {s:"Việt Nam đã triển khai mô hình nông nghiệp hữu cơ và phát triển sản phẩm nông sản sạch, đáp ứng nhu cầu tiêu dùng trong nước và xuất khẩu.",ans:true}
+  ]},
+  {title:"ĐỊA LÍ CÁV VÙNG KINH TẾ",items:[
+    {s:"Việc xây dựng các nhà máy thủy điện ở vùng Duyên hải Nam Trung Bộ và Tây Nguyên đỡ tốn chi phí hơn so với các vùng khác do có sông ngòi chảy qua các cao nguyên xếp tầng.",ans:true},
+    {s:"Ý nghĩa chủ yếu của việc xây dựng các nhà máy thủy điện ở Duyên hải Nam Trung Bộ và Tây Nguyên là cung cấp nguồn nước tưới cho cây trồng, phát triển du lịch, nuôi trồng thủy sản.",ans:true},
+    {s:"Khó khăn chủ yếu của việc xây dựng các nhà máy thủy điện ở Duyên hải Nam Trung Bộ và Tây Nguyên là chế độ nước thất thường, lưu lượng nước sông nhỏ.",ans:true},
+    {s:"Biện pháp chủ yếu để phát triển thủy điện bền vững ở Duyên hải Nam Trung Bộ và Tây Nguyên là hiện đại cơ sở hạ tầng kĩ thuật, gắn với thủy lợi.",ans:true},
+    {s:"Vùng có giá trị sản xuất công nghiệp lớn nhất của nước ta hiện nay là Đông Nam Bộ.",ans:true},
+    {s:"Vùng Đồng bằng sông Hồng hiện nay đang phát triển mạnh ngành du lịch trở thành ngành kinh tế thứ yếu của vùng.",ans:false},
+    {s:"Bắc Trung Bộ là vùng có tỉ lệ độ che phủ rừng cao nhất nước ta hiện nay.",ans:true},
+    {s:"Hiện nay, Đồng bằng sông Hồng chủ yếu tập trung phát triển các ngành công nghiệp có many thế mạnh về nguồn nguyên liệu và lao động dồi dào.",ans:false},
+    {s:"Ý nghĩa chủ yếu của việc phát triển các ngành công nghiệp ở Đồng bằng sông Hồng là thúc đẩy tăng trưởng kinh tế, nâng cao đời sống dân cư, khai thác tốt các nguồn lực của vùng, bảo vệ tốt tài nguyên và môi trường.",ans:true},
+    {s:"Đồng bằng sông Hồng chiếm tỉ trọng cao trong cơ cấu GDP cả nước chủ yếu do có số dân đông, chất lượng lao động cao.",ans:true},
+    {s:"Hiện nay, Duyên hải Nam Trung Bộ và Tây Nguyên là vùng có diện tích rừng và độ che phủ lớn nhất cả nước.",ans:true},
+    {s:"Biện pháp chủ yếu để tăng diện tích rừng tự nhiên của vùng Trung Bộ là khai thác rừng hợp lí, đẩy mạnh trồng rừng mới, lập các vườn quốc gia và khu bảo tồn, đầu tư công nghiệp chế biến.",ans:true},
+    {s:"Vai trò chủ yếu của rừng đầu nguồn ở Bắc Trung Bộ là điều hoà chế độ nước sông, hạn chế xói mòn đất đai, ngăn chặn hiện tượng cát bay, cát chảy.",ans:true},
+    {s:"Giải pháp chủ yếu để nâng cao hiệu quả ngành lâm nghiệp ở Bắc Trung Bộ là ứng dụng công nghệ cao, khai thác hợp lí đi đôi với bảo vệ rừng, đẩy mạnh xuất khẩu gỗ tròn, mở rộng thị trường.",ans:false},
+    {s:"Khó khăn chủ yếu để phát triển cây công nghiệp lâu năm ở vùng đồi núi của Bắc Trung Bộ là thị trường biến động, công nghiệp chế biến hạn chế, các thiên tai như bão, ngập lụt, cát bay cát chảy.",ans:true},
+    {s:"Ý nghĩa chủ yếu của việc phát triển sản xuất lâm nghiệp ở Bắc Trung Bộ là hạn chế thiên tai, tạo sản phẩm hàng hóa, khai thác tốt thế mạnh.",ans:true},
+    {s:"Thuận lợi chủ yếu để phát triển công nghiệp ở Đồng bằng sông Hồng là hạ tầng hiện đại, many lao động phổ thông, nguồn vốn đầu tư lớn.",ans:true},
+    {s:"Khó khăn chủ yếu trong việc khai thác bô - xít ở Duyên hải Nam Trung Bộ và Tây Nguyên là khí hậu phân mùa, tài nguyên phân bố tản, đất đai xói mòn.",ans:true},
+    {s:"Xâm nhập mặn ở Đồng bằng sông Cửu Long hiện nay chịu ảnh hưởng trực tiếp của nguồn nước từ thượng nguồn sông Mê Kông và triều cường.",ans:true},
+    {s:"Giải pháp chủ yếu để thích ứng với hiện tượng nước biển dâng trong nông nghiệp ở Đồng bằng sông Cửu Long là đa dạng hóa cây trồng, đẩy mạnh thâm canh và tăng
